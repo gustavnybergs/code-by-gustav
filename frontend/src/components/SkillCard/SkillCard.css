@@ -1,0 +1,70 @@
+@import '../../styles/variables.css';
+
+.skill-card {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-gray-lighter);
+  border-radius: 8px;
+  transition: all var(--transition-speed);
+}
+
+.skill-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  border-color: var(--color-gray-light);
+}
+
+.skill-card__icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-secondary);
+  border-radius: 8px;
+}
+
+.skill-card__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.skill-card__name {
+  font-size: var(--font-size-large);
+  color: var(--color-black);
+  margin: 0 0 var(--spacing-xs) 0;
+  font-weight: 600;
+}
+
+.skill-card__level {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.skill-card__level-bar {
+  flex: 1;
+  height: 8px;
+  background-color: var(--color-bg-tertiary);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.skill-card__level-fill {
+  height: 100%;
+  background-color: var(--color-black);
+  transition: width 1s ease-out;
+}
+
+.skill-card__level-text {
+  font-size: var(--font-size-small);
+  color: var(--color-gray-medium);
+  font-weight: 600;
+  min-width: 40px;
+  text-align: right;
+}
