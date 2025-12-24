@@ -1,24 +1,65 @@
 import React from 'react';
 import './SkillCard.css';
 
+// Importera Devicons
+import { 
+  DiJava,
+  DiReact,
+  DiJavascript1,
+  DiHtml5,
+  DiCss3,
+  DiMysql,
+  DiGit,
+  DiGithubBadge
+} from 'react-icons/di';
+
+// Importera Feather Icons
+import { 
+  FiCode,
+  FiDatabase, 
+  FiTool, 
+  FiUsers, 
+  FiTarget,
+  FiLock,
+  FiZap,
+  FiSettings,
+  FiBox,
+  FiFileText,
+  FiCheckSquare
+} from 'react-icons/fi';
+
+const iconMap = {
+  'Java': <DiJava />,
+  'Spring Boot': <FiBox />,
+  'Spring Security': <FiLock />,
+  'REST API': <FiZap />,
+  'JPA/Hibernate': <FiDatabase />,
+  'React': <DiReact />,
+  'JavaScript': <DiJavascript1 />,
+  'TypeScript': <FiFileText />,
+  'HTML5': <DiHtml5 />,
+  'CSS3': <DiCss3 />,
+  'MySQL': <DiMysql />,
+  'SQL': <FiDatabase />,
+  'Git': <DiGit />,
+  'GitHub': <DiGithubBadge />,
+  'GitHub Actions': <FiSettings />,
+  'Jest': <FiCheckSquare />,
+  'JUnit': <FiCheckSquare />,
+  'Agile/Scrum': <FiUsers />,
+  'Problem Solving': <FiTarget />
+};
+
 function SkillCard({ skill }) {
+  const icon = iconMap[skill.name] || <FiTool />;
+  
   return (
     <article className="skill-card">
       <div className="skill-card__icon">
-        {skill.icon}
+        {icon}
       </div>
-      <div className="skill-card__content">
-        <h3 className="skill-card__name">{skill.name}</h3>
-        <div className="skill-card__level">
-          <div className="skill-card__level-bar">
-            <div 
-              className="skill-card__level-fill"
-              style={{ width: `${skill.proficiencyLevel}%` }}
-            />
-          </div>
-          <span className="skill-card__level-text">{skill.proficiencyLevel}%</span>
-        </div>
-      </div>
+      <h3 className="skill-card__name">{skill.name}</h3>
+      <p className="skill-card__category">{skill.category}</p>
     </article>
   );
 }

@@ -24,17 +24,6 @@ function Skills() {
     fetchSkills();
   }, []);
 
-  const groupSkillsByCategory = () => {
-    const grouped = {};
-    skills.forEach(skill => {
-      if (!grouped[skill.category]) {
-        grouped[skill.category] = [];
-      }
-      grouped[skill.category].push(skill);
-    });
-    return grouped;
-  };
-
   if (loading) {
     return (
       <main className="skills">
@@ -55,8 +44,6 @@ function Skills() {
     );
   }
 
-  const groupedSkills = groupSkillsByCategory();
-
   return (
     <main className="skills">
       <section className="skills__hero">
@@ -71,16 +58,11 @@ function Skills() {
 
       <section className="skills__content">
         <div className="container">
-          {Object.keys(groupedSkills).sort().map(category => (
-            <div key={category} className="skills__category">
-              <h2 className="skills__category-title">{category}</h2>
-              <div className="skills__grid">
-                {groupedSkills[category].map(skill => (
-                  <SkillCard key={skill.id} skill={skill} />
-                ))}
-              </div>
-            </div>
-          ))}
+          <div className="skills__grid">
+            {skills.map(skill => (
+              <SkillCard key={skill.id} skill={skill} />
+            ))}
+          </div>
         </div>
       </section>
     </main>

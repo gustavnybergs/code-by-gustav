@@ -1,70 +1,63 @@
-@import '../../styles/variables.css';
-
 .skill-card {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: var(--spacing-md);
-  padding: var(--spacing-md);
-  background-color: var(--color-bg-primary);
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem 1rem;
   border: 1px solid var(--color-gray-lighter);
   border-radius: 8px;
-  transition: all var(--transition-speed);
+  background-color: var(--color-bg-primary);
+  transition: all var(--transition-speed) ease;
+  text-align: center;
+  aspect-ratio: 1 / 1;
 }
 
 .skill-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-  border-color: var(--color-gray-light);
+  border-color: var(--color-black);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .skill-card__icon {
   font-size: 2.5rem;
-  flex-shrink: 0;
-  width: 60px;
-  height: 60px;
+  color: var(--color-black);
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-bg-secondary);
-  border-radius: 8px;
-}
-
-.skill-card__content {
-  flex: 1;
-  min-width: 0;
+  margin-bottom: 0.5rem;
 }
 
 .skill-card__name {
-  font-size: var(--font-size-large);
+  font-size: 0.9rem;
+  font-weight: 600;
   color: var(--color-black);
-  margin: 0 0 var(--spacing-xs) 0;
-  font-weight: 600;
+  margin: 0;
 }
 
-.skill-card__level {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-}
-
-.skill-card__level-bar {
-  flex: 1;
-  height: 8px;
-  background-color: var(--color-bg-tertiary);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.skill-card__level-fill {
-  height: 100%;
-  background-color: var(--color-black);
-  transition: width 1s ease-out;
-}
-
-.skill-card__level-text {
-  font-size: var(--font-size-small);
+.skill-card__category {
+  font-size: 0.8rem;
+  font-weight: 400;
   color: var(--color-gray-medium);
-  font-weight: 600;
-  min-width: 40px;
-  text-align: right;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+/* Responsiv design */
+@media (max-width: 768px) {
+  .skill-card {
+    padding: 1rem 0.5rem;
+  }
+  
+  .skill-card__icon {
+    font-size: 2rem;
+  }
+  
+  .skill-card__name {
+    font-size: 0.85rem;
+  }
+  
+  .skill-card__category {
+    font-size: 0.75rem;
+  }
 }
