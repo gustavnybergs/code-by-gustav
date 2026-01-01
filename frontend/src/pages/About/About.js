@@ -125,7 +125,7 @@ function About() {
           <h2>Beyond the code</h2>
           <div className="about__outside-content">
             <div className="about__outside-item">
-              <h3>⚽ Football</h3>
+              <h3>Football</h3>
               <p>
                 Have played football for over 20 years at a semi-professional level. 
                 Team sports have taught me the importance of collaboration, communication, 
@@ -133,7 +133,7 @@ function About() {
               </p>
             </div>
             <div className="about__outside-item">
-              <h3>🔨 Renovation & Interior Design</h3>
+              <h3>Renovation & Interior Design</h3>
               <p>
                 In my free time I love building and renovating. This is where the 
                 similarity to coding became clear. Creating something from scratch, 
@@ -141,7 +141,7 @@ function About() {
               </p>
             </div>
             <div className="about__outside-item">
-              <h3>��‍🍳 Cooking</h3>
+              <h3>Cooking</h3>
               <p>
                 Enjoy experimenting in the kitchen and creating new dishes. Just like 
                 with coding, it's about following recipes but also daring to test 

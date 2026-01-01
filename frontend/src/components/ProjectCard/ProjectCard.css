@@ -7,20 +7,14 @@
   overflow: hidden;
   transition: all var(--transition-speed);
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .project-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   border-color: var(--color-gray-light);
-}
-
-.project-card__link {
-  text-decoration: none;
-  color: inherit;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
 }
 
 .project-card__image {
@@ -65,11 +59,21 @@
   flex: 1;
 }
 
+.project-card__title-link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .project-card__title {
   font-size: var(--font-size-large);
   color: var(--color-black);
   margin: 0;
   font-weight: 600;
+  transition: color var(--transition-speed);
+}
+
+.project-card__title-link:hover .project-card__title {
+  color: var(--color-gray-dark);
 }
 
 .project-card__description {
@@ -84,7 +88,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: auto;
 }
 
 .project-card__tech-badge {
@@ -94,4 +97,56 @@
   border-radius: 4px;
   font-size: var(--font-size-small);
   border: 1px solid var(--color-gray-lighter);
+}
+
+.project-card__actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: var(--spacing-sm);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--color-gray-lighter);
+}
+
+.project-card__button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: var(--font-size-small);
+  font-weight: 500;
+  text-decoration: none;
+  transition: all var(--transition-speed);
+  border: 1px solid;
+}
+
+.project-card__button--primary {
+  background-color: var(--color-black);
+  color: var(--color-bg-primary);
+  border-color: var(--color-black);
+}
+
+.project-card__button--primary:hover {
+  background-color: var(--color-gray-dark);
+  border-color: var(--color-gray-dark);
+}
+
+.project-card__button--secondary {
+  background-color: transparent;
+  color: var(--color-black);
+  border-color: var(--color-gray-light);
+}
+
+.project-card__button--secondary:hover {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-black);
+}
+
+.project-card__button--disabled {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-gray-medium);
+  border-color: var(--color-gray-lighter);
+  cursor: not-allowed;
 }

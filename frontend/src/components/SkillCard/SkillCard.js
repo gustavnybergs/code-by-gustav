@@ -6,26 +6,21 @@ import {
   DiJava,
   DiReact,
   DiJavascript1,
-  DiHtml5,
-  DiCss3,
   DiMysql,
   DiGit,
-  DiGithubBadge
+  DiDatabase
 } from 'react-icons/di';
 
 // Importera Feather Icons
 import { 
-  FiCode,
   FiDatabase, 
   FiTool, 
-  FiUsers, 
-  FiTarget,
   FiLock,
   FiZap,
-  FiSettings,
   FiBox,
   FiFileText,
-  FiCheckSquare
+  FiCheckSquare,
+  FiCloud
 } from 'react-icons/fi';
 
 const iconMap = {
@@ -37,17 +32,16 @@ const iconMap = {
   'React': <DiReact />,
   'JavaScript': <DiJavascript1 />,
   'TypeScript': <FiFileText />,
-  'HTML5': <DiHtml5 />,
-  'CSS3': <DiCss3 />,
   'MySQL': <DiMysql />,
-  'SQL': <FiDatabase />,
+  'PostgreSQL': <DiDatabase />,
   'Git': <DiGit />,
-  'GitHub': <DiGithubBadge />,
-  'GitHub Actions': <FiSettings />,
   'Jest': <FiCheckSquare />,
   'JUnit': <FiCheckSquare />,
-  'Agile/Scrum': <FiUsers />,
-  'Problem Solving': <FiTarget />
+  'Docker': <FiBox />,
+  'Vite': <FiZap />,
+  'Vercel': <FiCloud />,
+  'Railway': <FiCloud />,
+  'Azure': <FiCloud />
 };
 
 function SkillCard({ skill }) {
