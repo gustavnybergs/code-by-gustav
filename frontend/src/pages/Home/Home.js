@@ -23,7 +23,7 @@ function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentFrame((prev) => (prev + 1) % avatarFrames.length);
-    }, 2000);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, []);

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { GitHubCalendar } from 'react-github-calendar';
 import { projectService } from '../../services/api';
 import ProjectCard from '../../components/ProjectCard/ProjectCard';
 import './Projects.css';
@@ -53,6 +54,23 @@ function Projects() {
             A selection of projects I've worked on. From fullstack applications 
             to frontend experiments.
           </p>
+        </div>
+      </section>
+
+      <section className="projects__github-activity">
+        <div className="container">
+          <h2 className="projects__section-title">GitHub Activity</h2>
+          <p className="projects__section-subtitle">
+            My coding journey over the past year
+          </p>
+          <div className="projects__calendar-wrapper">
+            <GitHubCalendar 
+              username="gustavnybergs"
+              blockSize={12}
+              blockMargin={4}
+              fontSize={14}
+            />
+          </div>
         </div>
       </section>
 
