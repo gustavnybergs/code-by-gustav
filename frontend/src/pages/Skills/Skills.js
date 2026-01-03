@@ -3,6 +3,7 @@ import { skillService } from '../../services/api';
 import SkillCard from '../../components/SkillCard/SkillCard';
 import './Skills.css';
 
+
 function Skills() {
   const [skills, setSkills] = useState([]);
   const [loading, setLoading] = useState(true);
