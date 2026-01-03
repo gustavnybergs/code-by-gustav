@@ -1,49 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { GitHubCalendar } from 'react-github-calendar';
-import { projectService } from '../../services/api';
 import ProjectCard from '../../components/ProjectCard/ProjectCard';
 import './Projects.css';
 
 function Projects() {
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const response = await projectService.getAllProjects();
-        setProjects(response.data);
-        setLoading(false);
-      } catch (err) {
-        setError('Failed to load projects');
-        setLoading(false);
-        console.error('Error:', err);
-      }
-    };
-
-    fetchProjects();
-  }, []);
-
-  if (loading) {
-    return (
-      <main className="projects">
-        <div className="container">
-          <p>Loading projects...</p>
-        </div>
-      </main>
-    );
-  }
-
-  if (error) {
-    return (
-      <main className="projects">
-        <div className="container">
-          <p style={{color: 'red'}}>{error}</p>
-        </div>
-      </main>
-    );
-  }
+  // Hårdkodad projektdata, statisk data
+  const projects = [
+    {
+      id: 1,
+      title: "Code by Gustav - Portfolio",
+      description: "Fullstack portfolio website built with React, Spring Boot and PostgreSQL. Features project showcase, skills display, and contact form with RabbitMQ message queue.",
+      githubUrl: "https://github.com/gustavnybergs/code-by-gustav",
+      liveUrl: "https://code-by-gustav.vercel.app",
+      imageUrl: null,
+      featured: true,
+      createdDate: "2024-12-01"
+    },
+    {
+      id: 2,
+      title: "Weather Service with Authentication",
+      description: "Weather application with API integration and user authentication system. Built as a school project demonstrating Spring Boot backend skills and secure login implementation.",
+      githubUrl: "https://github.com/gustavnybergs/weather-service-auth",
+      liveUrl: null,
+      imageUrl: null,
+      featured: false,
+      createdDate: "2024-10-15"
+    },
+    {
+      id: 3,
+      title: "Agile Project - Java & UX Collaboration",
+      description: "Collaborative project between Java and UX classes, showcasing agile development methodology and cross-functional teamwork.",
+      githubUrl: "https://github.com/Elie0825/Grupp-5-Agila-projektet-",
+      liveUrl: "https://grupp-5-agila-projektet.vercel.app/",
+      imageUrl: null,
+      featured: false,
+      createdDate: "2024-09-20"
+    }
+  ];
 
   return (
     <main className="projects">
