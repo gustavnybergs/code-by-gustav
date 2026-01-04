@@ -3,6 +3,9 @@ import { GitHubCalendar } from 'react-github-calendar';
 import ProjectCard from '../../components/ProjectCard/ProjectCard';
 import SkillCard from '../../components/SkillCard/SkillCard';
 import './Projects.css';
+import portfolioImg from '../../assets/images/jag-front-1.png';
+import weatherGif from '../../assets/images/weather.gif';
+import marvelGif from '../../assets/images/marvel.gif';
 
 function Projects() {
   // Hårdkodad projektdata, statisk data
@@ -13,7 +16,7 @@ function Projects() {
       description: "Fullstack portfolio website built with React, Spring Boot and PostgreSQL. Features project showcase, skills display, and contact form with RabbitMQ message queue.",
       githubUrl: "https://github.com/gustavnybergs/code-by-gustav",
       liveUrl: "https://code-by-gustav.vercel.app",
-      imageUrl: null,
+      imageUrl: portfolioImg,
       featured: true,
       createdDate: "2024-12-01"
     },
@@ -23,7 +26,7 @@ function Projects() {
       description: "Weather application with API integration and user authentication system. Built as a school project demonstrating Spring Boot backend skills and secure login implementation.",
       githubUrl: "https://github.com/gustavnybergs/weather-service-auth",
       liveUrl: null,
-      imageUrl: null,
+      imageUrl: weatherGif,
       featured: false,
       createdDate: "2024-10-15"
     },
@@ -33,7 +36,7 @@ function Projects() {
       description: "Collaborative project between Java and UX classes, showcasing agile development methodology and cross-functional teamwork.",
       githubUrl: "https://github.com/Elie0825/Grupp-5-Agila-projektet-",
       liveUrl: "https://grupp-5-agila-projektet.vercel.app/",
-      imageUrl: null,
+      imageUrl: marvelGif,
       featured: false,
       createdDate: "2024-09-20"
     }

@@ -17,7 +17,7 @@ function Header() {
   return (
       <header className="header">
         <div className="header__container">
-          <Link to="/" className="header__logo" onClick={closeMenu}>
+          <Link to="/about" className="header__logo" onClick={closeMenu}>
             <img src={logo} alt="Code by Gustav" />
           </Link>
 
@@ -32,7 +32,7 @@ function Header() {
           </button>
 
           <nav className={`header__nav ${isMenuOpen ? 'header__nav--open' : ''}`}>
-            <Link to="/" className="header__nav-link" onClick={closeMenu}>Home</Link>
+            <Link to="/about" className="header__nav-link" onClick={closeMenu}>About</Link>
             <Link to="/projects" className="header__nav-link" onClick={closeMenu}>Projects</Link>
             <Link to="/contact" className="header__nav-link" onClick={closeMenu}>Contact</Link>
           </nav>
