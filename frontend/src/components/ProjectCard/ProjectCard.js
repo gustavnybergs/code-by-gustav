@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { FiGithub, FiExternalLink, FiLock } from 'react-icons/fi';
 import './ProjectCard.css';
 
@@ -16,9 +15,7 @@ function ProjectCard({ project }) {
             </div>
 
             <div className="project-card__content">
-                <Link to={`/projects/${project.id}`} className="project-card__title-link">
-                    <h3 className="project-card__title">{project.title}</h3>
-                </Link>
+                <h3 className="project-card__title">{project.title}</h3>
                 <p className="project-card__description">{project.description}</p>
 
                 <div className="project-card__actions">

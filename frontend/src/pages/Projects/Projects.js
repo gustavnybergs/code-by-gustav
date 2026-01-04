@@ -32,8 +32,8 @@ function Projects() {
     },
     {
       id: 3,
-      title: "Agile Project - Java & UX Collaboration",
-      description: "Collaborative project between Java and UX classes, showcasing agile development methodology and cross-functional teamwork.",
+      title: "Marvel Movie Explorer",
+      description: "Collaborative project between Java and UX classes building a Marvel movie database. Showcases agile development methodology, API integration with Marvel API, and cross-functional teamwork.",
       githubUrl: "https://github.com/Elie0825/Grupp-5-Agila-projektet-",
       liveUrl: "https://grupp-5-agila-projektet.vercel.app/",
       imageUrl: marvelGif,
@@ -44,25 +44,40 @@ function Projects() {
 
   // Hårdkodad skills-data
   const skills = [
-    { id: 1, name: "Java", category: "Backend" },
-    { id: 2, name: "Spring Boot", category: "Backend" },
-    { id: 3, name: "JPA/Hibernate", category: "Backend" },
-    { id: 4, name: "REST API", category: "Backend" },
-    { id: 5, name: "Spring Security", category: "Backend" },
-    { id: 6, name: "React", category: "Frontend" },
-    { id: 7, name: "JavaScript", category: "Frontend" },
-    { id: 8, name: "TypeScript", category: "Frontend" },
+    // Language
+    { id: 1, name: "Java", category: "Language" },
+    { id: 2, name: "JavaScript", category: "Language" },
+    { id: 3, name: "TypeScript", category: "Language" },
+
+    // Backend
+    { id: 4, name: "Spring Boot", category: "Backend" },
+    { id: 5, name: "JPA/Hibernate", category: "Backend" },
+    { id: 6, name: "REST API", category: "Backend" },
+    { id: 7, name: "Spring Security", category: "Backend" },
+
+    // Frontend
+    { id: 8, name: "React", category: "Frontend" },
+
+    // Database
     { id: 9, name: "PostgreSQL", category: "Database" },
     { id: 10, name: "MySQL", category: "Database" },
+
+    // Testing
     { id: 11, name: "Jest", category: "Testing" },
     { id: 12, name: "JUnit", category: "Testing" },
+
+    // DevOps
     { id: 13, name: "Docker", category: "DevOps" },
-    { id: 14, name: "Git", category: "Tools" },
-    { id: 15, name: "Vite", category: "Tools" },
-    { id: 16, name: "Vercel", category: "Tools" },
-    { id: 17, name: "Railway", category: "Tools" },
-    { id: 18, name: "Render", category: "Tools" },
-    { id: 19, name: "Azure", category: "Tools" }
+
+    // Cloud
+    { id: 14, name: "Vercel", category: "Cloud" },
+    { id: 15, name: "Railway", category: "Cloud" },
+    { id: 16, name: "Render", category: "Cloud" },
+    { id: 17, name: "Azure", category: "Cloud" },
+
+    // Tools
+    { id: 18, name: "Git", category: "Tools" },
+    { id: 19, name: "Vite", category: "Tools" }
   ];
 
   return (
