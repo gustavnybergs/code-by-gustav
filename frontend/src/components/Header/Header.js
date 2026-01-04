@@ -15,30 +15,29 @@ function Header() {
   };
 
   return (
-    <header className="header">
-      <div className="header__container">
-        <Link to="/" className="header__logo" onClick={closeMenu}>
-          <img src={logo} alt="Code by Gustav" />
-        </Link>
-        
-        <button 
-          className={`header__hamburger ${isMenuOpen ? 'header__hamburger--active' : ''}`}
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+      <header className="header">
+        <div className="header__container">
+          <Link to="/" className="header__logo" onClick={closeMenu}>
+            <img src={logo} alt="Code by Gustav" />
+          </Link>
 
-        <nav className={`header__nav ${isMenuOpen ? 'header__nav--open' : ''}`}>
-          <Link to="/" className="header__nav-link" onClick={closeMenu}>Home</Link>
-          <Link to="/projects" className="header__nav-link" onClick={closeMenu}>Projects</Link>
-          <Link to="/skills" className="header__nav-link" onClick={closeMenu}>Skills</Link>
-          <Link to="/contact" className="header__nav-link" onClick={closeMenu}>Contact</Link>
-        </nav>
-      </div>
-    </header>
+          <button
+              className={`header__hamburger ${isMenuOpen ? 'header__hamburger--active' : ''}`}
+              onClick={toggleMenu}
+              aria-label="Toggle menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          <nav className={`header__nav ${isMenuOpen ? 'header__nav--open' : ''}`}>
+            <Link to="/" className="header__nav-link" onClick={closeMenu}>Home</Link>
+            <Link to="/projects" className="header__nav-link" onClick={closeMenu}>Projects</Link>
+            <Link to="/contact" className="header__nav-link" onClick={closeMenu}>Contact</Link>
+          </nav>
+        </div>
+      </header>
   );
 }
 
