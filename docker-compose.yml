@@ -48,6 +48,8 @@ services:
     container_name: portfolio-backend
     ports:
       - "8080:8080"
+    env_file:
+      - ./backend/.env
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/portfolio_db
       SPRING_DATASOURCE_USERNAME: portfolio_user
