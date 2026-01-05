@@ -31,7 +31,7 @@ public class EmailService {
         logger.info("Förbereder email via SendGrid...");
         
         Email from = new Email(fromEmail, fromName);
-        Email to = new Email("gustavnybergs@gmail.com");
+        Email to = new Email("gustavnybergs@outlook.com");
         String subject = "Nytt meddelande från portfolio: " + message.getSubject();
         
         String emailBody = String.format(
