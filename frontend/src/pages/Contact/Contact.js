@@ -28,7 +28,7 @@ function Contact() {
               <h2>Other ways to reach me</h2>
               
               <a 
-                href="mailto:gustavnybergs@gmail.com"
+                href="mailto:gustavnybergs@outlook.com"
                 className="contact__info-card"
               >
                 <div className="contact__info-icon">
@@ -36,7 +36,7 @@ function Contact() {
                 </div>
                 <div className="contact__info-content">
                   <h3>Email</h3>
-                  <p>gustavnybergs@gmail.com</p>
+                  <p>gustavnybergs@outlook.com</p>
                 </div>
               </a>
 
@@ -73,8 +73,7 @@ function Contact() {
               <div className="contact__availability">
                 <h3>Availability</h3>
                 <p>
-                  I'm open to internship positions (LIA) starting spring 2025 and 
-                  full-time employment from summer 2026 after my graduation.
+                  I'm open to full-time employment from summer 2026 after my graduation.
                 </p>
               </div>
             </div>

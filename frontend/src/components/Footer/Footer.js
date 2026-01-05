@@ -48,7 +48,7 @@ function Footer() {
                 <FiLinkedin />
               </a>
               <a 
-                href="mailto:gustavnybergs@gmail.com"
+                href="mailto:gustavnybergs@outlook.com"
                 className="footer__social-link"
                 aria-label="Email"
               >
