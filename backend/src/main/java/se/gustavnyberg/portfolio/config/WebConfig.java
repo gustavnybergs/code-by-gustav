@@ -13,7 +13,9 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOriginPatterns(
                         "http://localhost:3000",
                         "https://code-by-gustav.vercel.app",
-                        "https://*.vercel.app"
+                        "https://*.vercel.app",
+                        "https://gustavnyberg.se",
+                        "https://www.gustavnyberg.se"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
