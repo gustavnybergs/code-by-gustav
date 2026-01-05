@@ -1,70 +1,138 @@
-# Getting Started with Create React App
+# Code by Gustav - Fullstack Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Fullstack portfolio-webbplats byggd som examensarbete för Javautvecklare-utbildningen på Stockholms Tekniska Institut (JAVA24).
 
-## Available Scripts
+**Live:** https://gustavnyberg.se
 
-In the project directory, you can run:
+## Screenshots
 
-### `npm start`
+### Desktop
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![About Hero](docs/screenshots/about-hero.png)
+![About Text](docs/screenshots/about-text.png)
+![Projects](docs/screenshots/projects.png)
+![Contact](docs/screenshots/contact.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Mobil
 
-### `npm test`
+![About Hero Mobile](docs/screenshots/about-hero-mobile.PNG)
+![About Text Mobile](docs/screenshots/about-text-mobile.PNG)
+![Projects Mobile](docs/screenshots/projects-mobile.PNG)
+![Projects GitHub Activity Mobile](docs/screenshots/projects-gha-mobile.PNG)
+![Contact Social Media Mobile](docs/screenshots/contact-sm-mobile.PNG)
+![Contact Mail Mobile](docs/screenshots/contact-mail-mobile.PNG)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Om projektet
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Denna portfolio syftar till att visa min kompetens som fullstack-utvecklare för potentiella arbetsgivare och rekryterare. Min bakgrund från sälj, kundtjänst och undervisning har gett mig en kombination av teknisk förmåga och kommunikationsförmåga som gör att jag kan översätta mellan affärsbehov och tekniska lösningar.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Tech Stack
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Frontend**
+- React 18
+- React Router
+- CSS med BEM-metodologi
+- Vercel (hosting)
 
-### `npm run eject`
+**Backend**
+- Java 17
+- Spring Boot 3.2
+- Spring Data JPA
+- RabbitMQ (message queue)
+- SendGrid (email-notifikationer)
+- Render (hosting)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Databas**
+- PostgreSQL (produktion)
+- MySQL (lokal utveckling via Docker)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Funktioner
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Responsiv design (mobile-first)
+- Kontaktformulär med asynkron meddelandehantering via RabbitMQ
+- Email-notifikationer via SendGrid API
+- Optimistiskt UI for snabb användarfeedback
+- GitHub Activity-kalender
+- Custom domän
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Projektstruktur
+```
+portfolio/
+├── frontend/          # React-applikation
+├── backend/           # Spring Boot API
+├── docker-compose.yml # Lokal utvecklingsmiljö
+└── README.md
+```
 
-## Learn More
+## Lokal utveckling
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Förutsättningar
+- Node.js 18+
+- Java 17+
+- Docker
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Starta med Docker
+```bash
+docker-compose up --build
+```
 
-### Code Splitting
+Frontend körs på http://localhost:3000
+Backend körs på http://localhost:8080
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## Reflektioner och lärdomar
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### CORS - när frontend och backend vägrar prata med varandra
 
-### Making a Progressive Web App
+CORS var något jag hade arbetat med tidigare under utbildningen, men mest i lokal utvecklingsmiljö. Att hantera det mellan två olika hostingtjänster var nytt. Felet "Access-Control-Allow-Origin" dök upp direkt när jag försökte koppla ihop Vercel och Render.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Lösningen var att konfigurera backend så att den tillåter anrop från min frontend-domän. Men det slutade inte där. Vercel genererar nya preview-URLs vid varje deploy, så jag fick använda wildcard-patterns för att tillåta alla Vercel-domäner. Sen när jag la till min custom domän (gustavnyberg.se) fick jag uppdatera CORS-konfigurationen igen.
 
-### Advanced Configuration
+### Gmail som slutade fungera i produktion
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Jag hade satt upp email-notifikationer med Gmail SMTP och det fungerade perfekt lokalt. Varje gång någon skickade ett meddelande via kontaktformuläret fick jag ett mail.
 
-### Deployment
+Sen deployade jag till Render och ingenting hände. Inga felmeddelanden, bara tystnad. Efter felsökning visade det sig att Render blockerar utgående trafik på SMTP-portar. Lösningen blev att migrera till SendGrid som använder ett API istället för SMTP. Det tog lite tid att sätta upp men fungerar bättre.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Beslutet att hårdkoda project- och skills-data
 
-### `npm run build` fails to minify
+Från början hämtade frontend all data från backend via REST API. Projekten, skills, allt låg i databasen. Det kändes som rätt sätt att göra det på som fullstack-utvecklare vid deployment.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Men laddningstiden blev lidande. Varje gång någon besökte sidan fick de vänta på att backend skulle svara. Till slut tog jag beslutet att hårdkoda projekten och skills direkt i frontend. Det kändes först som att fuska lite, men egentligen är det ett pragmatiskt val. Den datan ändras sällan och nu laddar sidan direkt. Backend används fortfarande för kontaktformuläret där dynamik faktiskt behövs.
+
+### RabbitMQ - message queue för kontaktformuläret
+
+RabbitMQ hade vi nyligen använt i ett skolprojekt så jag visste vad det var. Det kändes logiskt att använda det här också. Om något tillfälligt inte fungerar, till exempel om email-tjänsten är nere, så försvinner inte meddelandet utan ligger kvar i kön tills det kan processas.
+
+Det krångliga var att få det att fungera i produktion. Lokalt körde jag RabbitMQ i Docker, men för Render behövde jag en extern tjänst (CloudAMQP). Det blev många environment variables att hålla reda på.
+
+### Felsökning av duplicerade mappar
+
+Det här var ett av de mer förvirrande problemen. Saker fungerade inte som förväntat och felmeddelanden pekade åt olika håll.
+
+Efter felsökning visade det sig att jag av misstag hade duplicerat frontend-mappen. En låg inuti frontend-mappen där den skulle vara, och en hade hamnat utanför. När jag redigerade filer för att få det som jag ville så ändrade jag i fel mapp, vilket gjorde att ändringarna aldrig gav förväntat resultat.
+
+Lärdomen är att alltid dubbelkolla filstrukturen när något inte beter sig som det ska.
+
+---
+
+## Sammanfattning
+
+Det här projektet har lärt mig att deployment är minst lika utmanande som själva utvecklingen. Saker som fungerar lokalt kan bete sig annorlunda i produktion. CORS, miljövariabler, tjänstebegränsningar - allt kräver sin egen felsökning.
+
+Men det har också lärt mig att det är okej att ändra sig. Att gå från dynamisk data till hårdkodad data var inte ett steg bakåt, det var ett pragmatiskt val som förbättrade användarupplevelsen.
+
+---
+
+## Författare
+
+Gustav Nyberg  
+JAVA24, Stockholms Tekniska Institut  
+gustavnybergs@outlook.com
+
+## Live Demo
+
+https://gustavnyberg.se
