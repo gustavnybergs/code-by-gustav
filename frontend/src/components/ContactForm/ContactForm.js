@@ -11,7 +11,6 @@ function ContactForm() {
     message: ''
   });
   const [status, setStatus] = useState({ type: '', message: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -36,32 +35,32 @@ function ContactForm() {
     return true;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     
     if (!validateForm()) {
       return;
     }
 
-    setIsSubmitting(true);
-    setStatus({ type: '', message: '' });
+    // Optimistiskt UI - visa success direkt
+    setStatus({ 
+      type: 'success', 
+      message: 'Thank you for your message! I\'ll get back to you as soon as possible.' 
+    });
+    
+    // Spara formdata och rensa formuläret direkt
+    const messageData = { ...formData };
+    setFormData({ name: '', email: '', subject: '', message: '' });
 
-    try {
-      await contactService.sendMessage(formData);
-      setStatus({ 
-        type: 'success', 
-        message: 'Thank you for your message! I\'ll get back to you as soon as possible.' 
+    // Skicka till backend i bakgrunden
+    contactService.sendMessage(messageData)
+      .catch(error => {
+        console.error('Error sending message:', error);
+        setStatus({ 
+          type: 'error', 
+          message: 'Something went wrong. Please try again or contact me directly via email.' 
+        });
       });
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    } catch (error) {
-      setStatus({ 
-        type: 'error', 
-        message: 'Something went wrong. Please try again or contact me directly via email.' 
-      });
-      console.error('Error sending message:', error);
-    } finally {
-      setIsSubmitting(false);
-    }
   };
 
   return (
@@ -135,15 +134,8 @@ function ContactForm() {
       <button 
         type="submit" 
         className="contact-form__submit btn btn--primary"
-        disabled={isSubmitting}
       >
-        {isSubmitting ? (
-          'Sending...'
-        ) : (
-          <>
-            <FiSend /> Send message
-          </>
-        )}
+        <FiSend /> Send message
       </button>
     </form>
   );

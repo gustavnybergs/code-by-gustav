@@ -68,9 +68,9 @@ function About() {
             </p>
             <p>
               I've always loved renovating and building in my spare time. Planning a project, 
-              encountering problems, finding solutions, and finally seeing the perfect solution. 
-              That's where I thrive. One day I realized that coding is exactly the same thing, 
-              just digital.
+              encountering problems, finding solutions, and finally seeing the perfect result. 
+              That's where I thrive. When I started exploring coding, I realized it's exactly 
+              the same thing, just digital.
             </p>
             <p>
               With 20+ years of football at a semi-professional level, I've learned the 

@@ -91,6 +91,7 @@
 
 .contact__info-content {
   flex: 1;
+  min-width: 0;
 }
 
 .contact__info-content h3 {
@@ -106,6 +107,7 @@
   color: var(--color-black);
   font-size: var(--font-size-base);
   margin: 0;
+  word-break: break-word;
 }
 
 .contact__availability {
@@ -128,12 +130,65 @@
   margin: 0;
 }
 
-@media (max-width: 768px) {
+/* Tablet */
+@media (max-width: 968px) {
   .contact__grid {
     grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  .contact__info-section {
+    order: -1;
+  }
+}
+
+/* Mobil */
+@media (max-width: 576px) {
+  .contact__hero {
+    padding: var(--spacing-lg) var(--spacing-sm);
   }
   
   .contact__title {
-    font-size: 2rem;
+    font-size: 1.75rem;
+  }
+  
+  .contact__subtitle {
+    font-size: var(--font-size-base);
+  }
+  
+  .contact__content {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+  
+  .contact__form-section h2,
+  .contact__info-section h2 {
+    font-size: var(--font-size-large);
+  }
+  
+  .contact__info-card {
+    padding: var(--spacing-sm);
+    gap: var(--spacing-sm);
+  }
+  
+  .contact__info-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
+  }
+  
+  .contact__info-content p {
+    font-size: var(--font-size-small);
+  }
+  
+  .contact__availability {
+    padding: var(--spacing-sm);
+  }
+  
+  .contact__availability h3 {
+    font-size: var(--font-size-base);
+  }
+  
+  .contact__availability p {
+    font-size: var(--font-size-small);
   }
 }

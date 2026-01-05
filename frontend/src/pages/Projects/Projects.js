@@ -8,16 +8,16 @@ import weatherGif from '../../assets/images/weather.gif';
 import marvelGif from '../../assets/images/marvel.gif';
 
 function Projects() {
-  // Hårdkodad projektdata, statisk data
+  // Hårdkodad projektdata
   const projects = [
     {
       id: 1,
       title: "Code by Gustav - Portfolio",
       description: "Fullstack portfolio website built with React, Spring Boot and PostgreSQL. Features project showcase, skills display, and contact form with RabbitMQ message queue.",
       githubUrl: "https://github.com/gustavnybergs/code-by-gustav",
-      liveUrl: "https://code-by-gustav.vercel.app",
+      liveUrl: null,
       imageUrl: portfolioImg,
-      featured: true,
+      featured: false,
       createdDate: "2024-12-01"
     },
     {

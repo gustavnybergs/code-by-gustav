@@ -20,10 +20,8 @@ function Footer() {
           <div className="footer__section">
             <h4 className="footer__subtitle">Quick Links</h4>
             <nav className="footer__nav">
-              <Link to="/" className="footer__link">Home</Link>
-              <Link to="/projects" className="footer__link">Projects</Link>
-              <Link to="/skills" className="footer__link">Skills</Link>
               <Link to="/about" className="footer__link">About</Link>
+              <Link to="/projects" className="footer__link">Projects</Link>
               <Link to="/contact" className="footer__link">Contact</Link>
             </nav>
           </div>
