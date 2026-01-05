@@ -26,12 +26,11 @@ public class EmailService {
     @Value("${sendgrid.from.name}")
     private String fromName;
     
-    // Skickar email via SendGrid API
     public void sendContactNotification(ContactMessage message) {
         logger.info("Förbereder email via SendGrid...");
         
         Email from = new Email(fromEmail, fromName);
-        Email to = new Email("gustavnybergs@outlook.com");
+        Email to = new Email("gustavnybergs@gmail.com");
         String subject = "Nytt meddelande från portfolio: " + message.getSubject();
         
         String emailBody = String.format(
@@ -52,7 +51,6 @@ public class EmailService {
         Content content = new Content("text/plain", emailBody);
         Mail mail = new Mail(from, subject, to, content);
         
-        // Reply-to satt till avsändarens email
         mail.setReplyTo(new Email(message.getEmail()));
         
         SendGrid sg = new SendGrid(sendGridApiKey);
