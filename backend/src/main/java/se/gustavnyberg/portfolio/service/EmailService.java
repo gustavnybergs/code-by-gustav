@@ -1,39 +1,67 @@
 package se.gustavnyberg.portfolio.service;
 
-import com.sendgrid.*;
-import com.sendgrid.helpers.mail.Mail;
-import com.sendgrid.helpers.mail.objects.Content;
-import com.sendgrid.helpers.mail.objects.Email;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import se.gustavnyberg.portfolio.model.ContactMessage;
 
-import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class EmailService {
     
     private static final Logger logger = LoggerFactory.getLogger(EmailService.class);
     
-    @Value("${sendgrid.api.key}")
-    private String sendGridApiKey;
+    @Value("${mailersend.api.key}")
+    private String apiKey;
     
-    @Value("${sendgrid.from.email}")
+    @Value("${mailersend.from.email}")
     private String fromEmail;
     
-    @Value("${sendgrid.from.name}")
+    @Value("${mailersend.from.name}")
     private String fromName;
     
+    @Value("${mailersend.to.email}")
+    private String toEmail;
+    
+    private final RestTemplate restTemplate = new RestTemplate();
+    
+    // Skickar email via MailerSend API
     public void sendContactNotification(ContactMessage message) {
-        logger.info("Förbereder email via SendGrid...");
+        logger.info("Förbereder email via MailerSend...");
         
-        Email from = new Email(fromEmail, fromName);
-        Email to = new Email("gustavnybergs@gmail.com");
-        String subject = "Nytt meddelande från portfolio: " + message.getSubject();
+        String url = "https://api.mailersend.com/v1/email";
         
-        String emailBody = String.format(
+        // Bygg request body
+        Map<String, Object> requestBody = new HashMap<>();
+        
+        // Avsändare
+        Map<String, String> from = new HashMap<>();
+        from.put("email", fromEmail);
+        from.put("name", fromName);
+        requestBody.put("from", from);
+        
+        // Mottagare
+        Map<String, String> to = new HashMap<>();
+        to.put("email", toEmail);
+        to.put("name", "Gustav Nyberg");
+        requestBody.put("to", List.of(to));
+        
+        // Reply-to (kundens email)
+        Map<String, String> replyTo = new HashMap<>();
+        replyTo.put("email", message.getEmail());
+        replyTo.put("name", message.getName());
+        requestBody.put("reply_to", replyTo);
+        
+        // Ämne och innehåll
+        requestBody.put("subject", "Nytt meddelande från portfolio: " + message.getSubject());
+        
+        String textContent = String.format(
             "Nytt meddelande via portfolio!\n\n" +
             "Från: %s\n" +
             "Email: %s\n" +
@@ -47,32 +75,27 @@ public class EmailService {
             message.getMessage(),
             message.getSentDate()
         );
+        requestBody.put("text", textContent);
         
-        Content content = new Content("text/plain", emailBody);
-        Mail mail = new Mail(from, subject, to, content);
+        // Headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(apiKey);
         
-        mail.setReplyTo(new Email(message.getEmail()));
-        
-        SendGrid sg = new SendGrid(sendGridApiKey);
-        Request request = new Request();
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
         
         try {
-            request.setMethod(Method.POST);
-            request.setEndpoint("mail/send");
-            request.setBody(mail.build());
+            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
             
-            Response response = sg.api(request);
-            
-            if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
-                logger.info("Email skickat via SendGrid! Status: {}", response.getStatusCode());
+            if (response.getStatusCode().is2xxSuccessful()) {
+                logger.info("Email skickat via MailerSend! Status: {}", response.getStatusCode());
             } else {
-                logger.error("SendGrid fel - Status: {}, Body: {}", 
+                logger.error("MailerSend fel - Status: {}, Body: {}", 
                     response.getStatusCode(), response.getBody());
             }
-            
-        } catch (IOException e) {
-            logger.error("CRITICAL: Fel vid SendGrid API-anrop!", e);
-            logger.error("SendGrid error: {}", e.getMessage());
+        } catch (Exception e) {
+            logger.error("CRITICAL: Fel vid MailerSend API-anrop!", e);
+            logger.error("MailerSend error: {}", e.getMessage());
         }
     }
 }
