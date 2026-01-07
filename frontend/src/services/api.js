@@ -10,19 +10,6 @@ const api = axios.create({
   },
 });
 
-// Project endpoints
-export const projectService = {
-  getAllProjects: () => api.get('/projects'),
-  getFeaturedProjects: () => api.get('/projects/featured'),
-  getProjectById: (id) => api.get(`/projects/${id}`),
-};
-
-// Skill endpoints
-export const skillService = {
-  getAllSkills: () => api.get('/skills'),
-  getSkillsByCategory: (category) => api.get(`/skills/category/${category}`),
-};
-
 // Contact endpoints
 export const contactService = {
   sendMessage: (message) => api.post('/contact', message),

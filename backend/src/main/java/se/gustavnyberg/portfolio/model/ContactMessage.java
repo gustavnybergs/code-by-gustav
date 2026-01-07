@@ -8,6 +8,18 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * Datamodell för kontaktmeddelanden.
+ *
+ * Representerar både Java-objektet som skickas runt i applikationen
+ * och databastabellen "contact_messages" i PostgreSQL.
+ *
+ * Implements Serializable krävs för att kunna skicka objektet via RabbitMQ.
+ * Lombok-annotationerna skapar getters, setters och konstruktorer automatiskt.
+ *
+ * @PrePersist sätter tidsstämpel automatiskt när meddelandet sparas.
+ */
+
 @Entity
 @Table(name = "contact_messages")
 @Data
@@ -33,12 +45,8 @@ public class ContactMessage implements Serializable {
     private String message;
     
     private LocalDateTime sentDate;
-    
-    // For admin to mark messages as read
-    @Column(nullable = false)
-    private Boolean isRead = false;
-    
-    // Automatically set timestamp when message is created
+
+    // Automatisk tidsstämpel när meddelande skapas
     @PrePersist
     protected void onCreate() {
         sentDate = LocalDateTime.now();

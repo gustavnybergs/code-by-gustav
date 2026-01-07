@@ -11,6 +11,20 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * RabbitMQ-konfiguration för meddelandekön.
+ *
+ * Skapar en kö där kontaktmeddelanden läggs innan de processas.
+ * Exchange fungerar som en brevsorterare som skickar meddelanden
+ * till rätt kö baserat på routing key.
+ *
+ * För denna portfolio används bara en kö, men strukturen med
+ * exchange och routing key gör det skalbart om fler köer behövs senare.
+ * tex mail eller sms kö
+ *
+ * JSON-convertern omvandlar Java-objekt till JSON när de skickas till kön.
+ */
+
 @Configuration
 public class RabbitMQConfig {
     
@@ -22,7 +36,7 @@ public class RabbitMQConfig {
     // Skapa queue för kontaktmeddelanden
     @Bean
     public Queue contactMessagesQueue() {
-        return new Queue(QUEUE_NAME, true); // durable = true
+        return new Queue(QUEUE_NAME, true); // durable = true = kön överlever omstart
     }
     
     // Skapa topic exchange
@@ -40,7 +54,7 @@ public class RabbitMQConfig {
                 .with(ROUTING_KEY);
     }
     
-    // JSON message converter för att skicka objekt som JSON
+    // JSON message converter för att skicka objekt som JSON till kön
     @Bean
     public MessageConverter jsonMessageConverter() {
         return new Jackson2JsonMessageConverter();

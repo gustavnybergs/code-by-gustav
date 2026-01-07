@@ -49,27 +49,4 @@ public class ContactController {
                     .body("Failed to queue message");
         }
     }
-    
-    // Get all messages (for admin)
-    @GetMapping
-    public List<ContactMessage> getAllMessages() {
-        return contactMessageRepository.findAll();
-    }
-    
-    // Get unread messages (for admin)
-    @GetMapping("/unread")
-    public List<ContactMessage> getUnreadMessages() {
-        return contactMessageRepository.findByIsReadFalse();
-    }
-    
-    // Mark message as read (for admin)
-    @PutMapping("/{id}/read")
-    public ResponseEntity<ContactMessage> markAsRead(@PathVariable Long id) {
-        return contactMessageRepository.findById(id)
-                .map(message -> {
-                    message.setIsRead(true);
-                    return ResponseEntity.ok(contactMessageRepository.save(message));
-                })
-                .orElse(ResponseEntity.notFound().build());
-    }
 }

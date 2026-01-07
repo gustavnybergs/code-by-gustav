@@ -6,12 +6,14 @@ import se.gustavnyberg.portfolio.model.ContactMessage;
 
 import java.util.List;
 
+/**
+ * Databaskoppling för kontaktmeddelanden.
+ *
+ * Genom att ärva JpaRepository får vi färdiga metoder som save()
+ * för att spara meddelanden i PostgreSQL.
+ */
+
 @Repository
 public interface ContactMessageRepository extends JpaRepository<ContactMessage, Long> {
 
-    List<ContactMessage> findByIsReadFalse();
-
-    List<ContactMessage> findByIsReadTrue();
-
-    List<ContactMessage> findByEmail(String email);
 }

@@ -8,6 +8,16 @@ import se.gustavnyberg.portfolio.model.ContactMessage;
 import se.gustavnyberg.portfolio.repository.ContactMessageRepository;
 import se.gustavnyberg.portfolio.service.EmailService;
 
+/**
+ * Lyssnar på RabbitMQ-kön och processar inkommande kontaktmeddelanden.
+ *
+ * När ett meddelande kommer från kön:
+ * 1. Sparas det i databasen (PostgreSQL)
+ * 2. Skickas email-notifikation till Outlook via MailerSend
+ *
+ * Try-catch säkerställer att fel loggas utan att krascha applikationen.
+ */
+
 @Component
 public class ContactMessageConsumer {
     
@@ -31,7 +41,7 @@ public class ContactMessageConsumer {
             ContactMessage savedMessage = contactMessageRepository.save(message);
             logger.info("Meddelande sparat i databas med ID: {}", savedMessage.getId());
             
-            // Skickar email-notis via SendGrid
+            // Skickar email till outlook via MailerSend
             emailService.sendContactNotification(savedMessage);
             
         } catch (Exception e) {

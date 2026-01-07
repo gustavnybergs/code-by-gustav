@@ -12,6 +12,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Skickar email via MailerSend API.
+ *
+ * När ett meddelande processas bygger denna klass ett JSON-objekt
+ * med avsändare, mottagare och innehåll, och skickar det till MailerSend.
+ * MailerSend levererar sedan mailet till Outlook.
+ *
+ * Reply-to sätts till kundens email så att jag kan svara direkt.
+ */
+
 @Service
 public class EmailService {
     
