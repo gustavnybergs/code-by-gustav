@@ -1,8 +1,8 @@
 @import '../../styles/variables.css';
 
 .footer {
-  background-color: var(--color-black);
-  color: var(--color-bg-primary);
+  background-color: #121212;
+  color: #ffffff;
   padding: var(--spacing-xl) var(--spacing-md) var(--spacing-md);
   margin-top: auto;
 }
@@ -76,15 +76,15 @@
   justify-content: center;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
-  color: var(--color-bg-primary);
+  color: #ffffff;
   text-decoration: none;
   font-size: 1.25rem;
   transition: all var(--transition-speed);
 }
 
 .footer__social-link:hover {
-  background-color: var(--color-bg-primary);
-  color: var(--color-black);
+  background-color: #ffffff;
+  color: #121212;
   transform: translateY(-2px);
 }
 

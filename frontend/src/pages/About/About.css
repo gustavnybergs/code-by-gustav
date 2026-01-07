@@ -294,10 +294,14 @@
 
 .about__cta {
   text-align: center;
-  padding: var(--spacing-xl) var(--spacing-md);
+  padding: var(--spacing-xl) var(--spacing-md) 4rem;
   background-color: var(--color-bg-secondary);
   border-radius: 8px;
   margin-top: var(--spacing-xl);
+}
+
+.about__cta.container {
+  padding: var(--spacing-xl) var(--spacing-md) 4rem;
 }
 
 .about__cta h3 {

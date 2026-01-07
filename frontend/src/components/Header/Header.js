@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { FiSun, FiMoon } from 'react-icons/fi';
 import './Header.css';
 import logo from '../../assets/images/gn.jpg';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    // Kolla localStorage vid första renderingen
+    const saved = localStorage.getItem('theme');
+    return saved === 'dark';
+  });
+
+  useEffect(() => {
+    // Uppdatera data-theme på html-elementet
+    document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+  }, [isDarkMode]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -12,6 +24,10 @@ function Header() {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+  };
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
   };
 
   return (
@@ -35,6 +51,13 @@ function Header() {
             <Link to="/about" className="header__nav-link" onClick={closeMenu}>About</Link>
             <Link to="/projects" className="header__nav-link" onClick={closeMenu}>Projects</Link>
             <Link to="/contact" className="header__nav-link" onClick={closeMenu}>Contact</Link>
+            <button
+                className="header__theme-toggle"
+                onClick={toggleTheme}
+                aria-label="Toggle dark mode"
+            >
+              {isDarkMode ? <FiSun /> : <FiMoon />}
+            </button>
           </nav>
         </div>
       </header>
