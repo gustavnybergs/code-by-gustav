@@ -1,6 +1,7 @@
 package se.gustavnyberg.portfolio.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,10 @@ import org.springframework.amqp.AmqpException;
 import se.gustavnyberg.portfolio.config.RabbitMQConfig;
 import se.gustavnyberg.portfolio.model.ContactMessage;
 import se.gustavnyberg.portfolio.repository.ContactMessageRepository;
+import se.gustavnyberg.portfolio.service.RateLimiterService;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -23,9 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 /**
  * Tester för ContactController.
- * 
- * Använder @WebMvcTest för att bara ladda web-lagret, inte hela applikationen.
- * MockBean används för att mocka dependencies som RabbitTemplate.
+ * Testar REST-endpoint, validering, RabbitMQ-integration och rate limiting.
  */
 @WebMvcTest(ContactController.class)
 class ContactControllerTest {
@@ -42,7 +43,15 @@ class ContactControllerTest {
     @MockBean
     private ContactMessageRepository contactMessageRepository;
 
-    // Hjälpmetod för att skapa ett giltigt meddelande
+    @MockBean
+    private RateLimiterService rateLimiterService;
+
+    @BeforeEach
+    void setUp() {
+        // Tillåt requests som standard
+        when(rateLimiterService.isAllowed(anyString())).thenReturn(true);
+    }
+
     private ContactMessage createValidMessage() {
         ContactMessage message = new ContactMessage();
         message.setName("Test Testsson");
@@ -73,7 +82,6 @@ class ContactControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(message)));
 
-        // Verifiera att RabbitTemplate anropades med rätt exchange och routing key
         verify(rabbitTemplate, times(1)).convertAndSend(
                 eq(RabbitMQConfig.EXCHANGE_NAME),
                 eq(RabbitMQConfig.ROUTING_KEY),
@@ -110,7 +118,6 @@ class ContactControllerTest {
     void submitContactForm_RabbitMQFailure_Returns500() throws Exception {
         ContactMessage message = createValidMessage();
 
-        // Simulera att RabbitMQ kastar exception
         doThrow(new AmqpException("Connection failed"))
                 .when(rabbitTemplate).convertAndSend(anyString(), anyString(), any(ContactMessage.class));
 
@@ -119,5 +126,23 @@ class ContactControllerTest {
                 .content(objectMapper.writeValueAsString(message)))
                 .andExpect(status().isInternalServerError())
                 .andExpect(content().string("Failed to queue message"));
+    }
+
+    @Test
+    @DisplayName("Rate limit överskriden returnerar 429 Too Many Requests")
+    void submitContactForm_RateLimitExceeded_Returns429() throws Exception {
+        ContactMessage message = createValidMessage();
+        
+        // Simulera att rate limit är nådd
+        when(rateLimiterService.isAllowed(anyString())).thenReturn(false);
+
+        mockMvc.perform(post("/api/contact")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(message)))
+                .andExpect(status().isTooManyRequests())
+                .andExpect(content().string("Too many requests. Please wait a moment before trying again."));
+
+        // Verifiera att RabbitMQ INTE anropades
+        verify(rabbitTemplate, never()).convertAndSend(anyString(), anyString(), any(ContactMessage.class));
     }
 }
