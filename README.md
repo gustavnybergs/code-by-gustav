@@ -33,7 +33,7 @@ Denna portfolio syftar till att visa min kompetens som fullstack-utvecklare för
 **Frontend**
 - React 18
 - React Router
-- CSS med BEM-metodologi
+- CSS 
 - Vercel (hosting)
 
 **Backend**
@@ -41,7 +41,7 @@ Denna portfolio syftar till att visa min kompetens som fullstack-utvecklare för
 - Spring Boot 3.2
 - Spring Data JPA
 - RabbitMQ (message queue)
-- SendGrid (email-notifikationer)
+- MailerSend (email-notifikationer)
 - Render (hosting)
 
 **Databas**
@@ -52,10 +52,41 @@ Denna portfolio syftar till att visa min kompetens som fullstack-utvecklare för
 
 - Responsiv design (mobile-first)
 - Kontaktformulär med asynkron meddelandehantering via RabbitMQ
-- Email-notifikationer via SendGrid API
-- Optimistiskt UI for snabb användarfeedback
+- Email-notifikationer via MailerSend API
+- Optimistiskt UI för snabb användarfeedback
 - GitHub Activity-kalender
 - Custom domän
+
+## Tester
+
+Projektet har 28 automatiserade tester:
+
+**Backend (22 tester)**
+- ContactControllerTest: REST-endpoint, validering, rate limiting
+- ContactMessageTest: Modell-validering
+- EmailServiceTest: Email-integration
+- ContactMessageConsumerTest: RabbitMQ-konsument
+- RateLimiterServiceTest: Rate limiting-logik
+
+**Frontend (6 tester)**
+- App.test.js: Routing och sidladdning
+- ContactForm.test.js: Formulärvalidering
+
+Kör tester:
+```bash
+# Backend
+cd backend && mvn test
+
+# Frontend
+cd frontend && npm test
+```
+
+## Säkerhet
+
+- **Rate limiting:** Max 5 requests per minut per IP för kontaktformuläret
+- **Input-validering:** Bean Validation på backend, client-side validering på frontend
+- **CORS-konfiguration:** Endast tillåtna domäner kan anropa API:et
+- **Miljövariabler:** Känslig data (API-nycklar, databasuppgifter) lagras som environment variables
 
 ## Projektstruktur
 ```
@@ -91,11 +122,13 @@ CORS var något jag hade arbetat med tidigare under utbildningen, men mest i lok
 
 Lösningen var att konfigurera backend så att den tillåter anrop från min frontend-domän. Men det slutade inte där. Vercel genererar nya preview-URLs vid varje deploy, så jag fick använda wildcard-patterns för att tillåta alla Vercel-domäner. Sen när jag la till min custom domän (gustavnyberg.se) fick jag uppdatera CORS-konfigurationen igen.
 
-### Gmail som slutade fungera i produktion
+### Email-leverans - från Gmail till MailerSend
 
 Jag hade satt upp email-notifikationer med Gmail SMTP och det fungerade perfekt lokalt. Varje gång någon skickade ett meddelande via kontaktformuläret fick jag ett mail.
 
-Sen deployade jag till Render och ingenting hände. Inga felmeddelanden, bara tystnad. Efter felsökning visade det sig att Render blockerar utgående trafik på SMTP-portar. Lösningen blev att migrera till SendGrid som använder ett API istället för SMTP. Det tog lite tid att sätta upp men fungerar bättre.
+Sen deployade jag till Render och ingenting hände. Inga felmeddelanden, bara tystnad. Efter felsökning visade det sig att Render blockerar utgående trafik på SMTP-portar. Första lösningen blev SendGrid som använder ett API istället för SMTP. Det fungerade bra ett tag, men leveransen till Microsoft-adresser (Outlook, Hotmail) var opålitlig.
+
+Till slut migrerade jag till MailerSend med en verifierad egen domän (noreply@gustavnyberg.se). Det krävde DNS-konfiguration med SPF och DKIM, men resultatet är pålitlig leverans till alla mottagare.
 
 ### Beslutet att hårdkoda project- och skills-data
 
