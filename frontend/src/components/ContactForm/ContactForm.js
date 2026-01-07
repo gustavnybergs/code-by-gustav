@@ -54,13 +54,22 @@ function ContactForm() {
 
     // Skicka till backend i bakgrunden
     contactService.sendMessage(messageData)
-      .catch(error => {
-        console.error('Error sending message:', error);
-        setStatus({ 
-          type: 'error', 
-          message: 'Something went wrong. Please try again or contact me directly via email.' 
+        .catch(error => {
+          console.error('Error sending message:', error);
+
+          // Specifikt meddelande för rate limiting (429)
+          if (error.response && error.response.status === 429) {
+            setStatus({
+              type: 'error',
+              message: 'Too many messages sent. Please wait a moment before trying again.'
+            });
+          } else {
+            setStatus({
+              type: 'error',
+              message: 'Something went wrong. Please try again or contact me directly via email.'
+            });
+          }
         });
-      });
   };
 
   return (
