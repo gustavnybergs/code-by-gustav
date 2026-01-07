@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import se.gustavnyberg.portfolio.config.RabbitMQConfig;
 import se.gustavnyberg.portfolio.model.ContactMessage;
 import se.gustavnyberg.portfolio.repository.ContactMessageRepository;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class ContactController {
     
     // Submit contact form - skicka till RabbitMQ istället för direkt till DB
     @PostMapping
-    public ResponseEntity<String> submitContactForm(@RequestBody ContactMessage contactMessage) {
+    public ResponseEntity<String> submitContactForm(@Valid @RequestBody ContactMessage contactMessage) {
         try {
             // Skicka meddelandet till RabbitMQ queue
             rabbitTemplate.convertAndSend(
