@@ -2,18 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FiSun, FiMoon } from 'react-icons/fi';
 import './Header.css';
-import logo from '../../assets/images/gn.jpg';
+import blackLogo from '../../assets/images/cbg-black.png';
+import whiteLogo from '../../assets/images/cbg-white.png';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    // Kolla localStorage vid första renderingen
     const saved = localStorage.getItem('theme');
     return saved === 'dark';
   });
 
   useEffect(() => {
-    // Uppdatera data-theme på html-elementet
     document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
   }, [isDarkMode]);
@@ -34,7 +33,7 @@ function Header() {
       <header className="header">
         <div className="header__container">
           <Link to="/about" className="header__logo" onClick={closeMenu}>
-            <img src={logo} alt="Code by Gustav" />
+            <img src={isDarkMode ? whiteLogo : blackLogo} alt="Code by Gustav" />
           </Link>
 
           <button

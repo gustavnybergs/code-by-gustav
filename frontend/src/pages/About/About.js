@@ -6,6 +6,7 @@ import profileImage from '../../assets/images/jag_avatar.png';
 import pekarHalv from '../../assets/images/pekar-halvrak-arm.png';
 import pekarRak from '../../assets/images/pekar-rak-arm.png';
 
+
 function About() {
   const [currentFrame, setCurrentFrame] = useState(0);
 
@@ -219,7 +220,7 @@ function About() {
             <p>Download my resume or contact me directly!</p>
             <div className="about__cta-buttons">
               <a
-                  href="/Gustav_Nyberg_CV.pdf"
+                  href="/gustav-nyberg-cv.pdf"
                   download
                   className="btn btn--primary"
               >
