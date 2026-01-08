@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FiChevronDown, FiDownload, FiTarget, FiUsers, FiTool, FiAward } from 'react-icons/fi';
+import { FiChevronDown, FiDownload, FiTarget, FiUsers, FiTool, FiAward, FiMapPin } from 'react-icons/fi';
 import './About.css';
 import profileImage from '../../assets/images/jag_avatar.png';
 import pekarHalv from '../../assets/images/pekar-halvrak-arm.png';
 import pekarRak from '../../assets/images/pekar-rak-arm.png';
 
-
 function About() {
   const [currentFrame, setCurrentFrame] = useState(0);
+  const [isStoryExpanded, setIsStoryExpanded] = useState(false);
 
   const avatarFrames = [
     pekarHalv,
@@ -76,10 +76,12 @@ function About() {
                   <span className="hero__subtitle">Fullstack Developer</span>
                   Gustav Nyberg
                 </h1>
+                <span className="hero__location">
+                <FiMapPin /> Stockholm, Sweden
+              </span>
                 <p className="hero__description">
-                  I create modern web applications with a focus on clean code,
-                  user experience, and scalability. Specializing in Java Spring Boot
-                  and React.
+                  I'm not your typical IT guy. My background in sales, teaching,
+                  and team sports gives me perspectives that are rare in tech.
                 </p>
                 <div className="hero__cta">
                   <Link to="/projects" className="btn btn--primary">
@@ -118,42 +120,42 @@ function About() {
 
         <section id="about-section" className="about">
           <div className="container">
-            <div className="about__hero-content">
-              <h2 className="about__title">From sales to fullstack development</h2>
-              <p className="about__lead">
-                I'm not your typical IT guy. My background in sales, teaching,
-                and team sports gives me perspectives that are rare in tech.
-              </p>
-            </div>
+            <h2 className="about__title">From sales to fullstack development</h2>
           </div>
 
           <div className="container">
             <h3>My journey to code</h3>
-            <div className="about__story-content">
+            <div className={`about__story-content ${isStoryExpanded ? 'about__story-content--expanded' : ''}`}>
               <p>
                 During my years in sales and customer service at Telenor, I consistently
                 ranked among the country's top sellers. This despite working 75-85%.
                 But I realized sales wasn't something I wanted to do for the rest of my life.
                 So I started looking around for what could be next.
               </p>
-              <p>
+              <p className="about__story-hidden">
                 I've always loved renovating and building in my spare time. Planning a project,
                 encountering problems, finding solutions, and finally seeing the perfect solution.
                 That's where I thrive. One day I realized that coding is exactly the same thing,
                 just digital.
               </p>
-              <p>
+              <p className="about__story-hidden">
                 With 20+ years of football at a semi-professional level, I've learned the
                 importance of teamwork, discipline, and never giving up when things get tough.
                 The combination of my experience from sales, teaching, and team sports makes
                 me unique in the IT industry.
               </p>
-              <p>
+              <p className="about__story-hidden">
                 Today I'm studying Java development at Stockholm Technical Institute with
                 top grades in all completed courses. I'll graduate in spring 2026. I'm ready
                 to bring everything I've learned from my previous career into the tech world.
               </p>
             </div>
+            <button
+                className="about__read-more"
+                onClick={() => setIsStoryExpanded(!isStoryExpanded)}
+            >
+              {isStoryExpanded ? 'Read less' : 'Read more'}
+            </button>
           </div>
 
           <div className="container">
@@ -220,20 +222,20 @@ function About() {
             <p>Download my resume or contact me directly!</p>
             <div className="about__cta-buttons">
               <a
-                  href="/gustav-nyberg-cv.pdf"
-                  download
-                  className="btn btn--primary"
+              href="/gustav-nyberg-cv.pdf"
+              download
+              className="btn btn--primary"
               >
-                <FiDownload /> Download Resume
-              </a>
-              <Link to="/contact" className="btn btn--secondary">
-                Contact me
-              </Link>
-            </div>
+              <FiDownload /> Download Resume
+            </a>
+            <Link to="/contact" className="btn btn--secondary">
+              Contact me
+            </Link>
           </div>
-        </section>
-      </main>
-  );
+        </div>
+      </section>
+</main>
+);
 }
 
 export default About;

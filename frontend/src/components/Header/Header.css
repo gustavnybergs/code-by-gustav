@@ -132,7 +132,16 @@
   }
 
   .header__logo img {
-    height: 50px;
+    height: 200px;
+  }
+  .header__logo {
+    margin-left: -10px;
+  }
+
+  .header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .header__nav {
