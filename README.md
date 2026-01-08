@@ -8,19 +8,46 @@ Fullstack portfolio-webbplats byggd som examensarbete för Javautvecklare-utbild
 
 ### Desktop
 
-![About Hero](docs/screenshots/about-hero.png)
-![About Text](docs/screenshots/about-text.png)
-![Projects](docs/screenshots/projects.png)
-![Contact](docs/screenshots/contact.png)
+<p>
+  <img src="docs/screenshots/about-hero.png" alt="About Hero" width="600">
+</p>
+
+<p>
+  <img src="docs/screenshots/about-hero-dark.png" alt="About Hero Dark Mode" width="600">
+</p>
+
+<p>
+  <img src="docs/screenshots/about-text.png" alt="About Text" width="600">
+</p>
+
+<p>
+  <img src="docs/screenshots/projects.png" alt="Projects" width="600">
+</p>
+
+<p>
+  <img src="docs/screenshots/projects-tech-stack.png" alt="Projects Tech Stack" width="600">
+</p>
+
+<p>
+  <img src="docs/screenshots/contact.png" alt="Contact" width="600">
+</p>
 
 ### Mobil
 
-![About Hero Mobile](docs/screenshots/about-hero-mobile.PNG)
-![About Text Mobile](docs/screenshots/about-text-mobile.PNG)
-![Projects Mobile](docs/screenshots/projects-mobile.PNG)
-![Projects GitHub Activity Mobile](docs/screenshots/projects-gha-mobile.PNG)
-![Contact Social Media Mobile](docs/screenshots/contact-sm-mobile.PNG)
-![Contact Mail Mobile](docs/screenshots/contact-mail-mobile.PNG)
+<p>
+  <img src="docs/screenshots/about-hero-mobile.PNG" alt="About Hero Mobile" width="250">
+  <img src="docs/screenshots/about-text-mobile.PNG" alt="About Text Mobile" width="250">
+</p>
+
+<p>
+  <img src="docs/screenshots/projects-mobile.PNG" alt="Projects Mobile" width="250">
+  <img src="docs/screenshots/projects-gha-mobile.PNG" alt="Projects GitHub Activity Mobile" width="250">
+</p>
+
+<p>
+  <img src="docs/screenshots/contact-sm-mobile.PNG" alt="Contact Social Media Mobile" width="250">
+  <img src="docs/screenshots/contact-mail-mobile.PNG" alt="Contact Mail Mobile" width="250">
+</p>
 
 ---
 
@@ -33,7 +60,7 @@ Denna portfolio syftar till att visa min kompetens som fullstack-utvecklare för
 **Frontend**
 - React 18
 - React Router
-- CSS 
+- CSS
 - Vercel (hosting)
 
 **Backend**
@@ -51,6 +78,7 @@ Denna portfolio syftar till att visa min kompetens som fullstack-utvecklare för
 ## Funktioner
 
 - Responsiv design (mobile-first)
+- Dark mode
 - Kontaktformulär med asynkron meddelandehantering via RabbitMQ
 - Email-notifikationer via MailerSend API
 - Optimistiskt UI för snabb användarfeedback
